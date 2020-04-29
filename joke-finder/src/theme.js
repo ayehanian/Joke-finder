@@ -3,21 +3,22 @@ import {createMuiTheme} from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
 
-    // breakpoints: {
-    //   keys: [
-    //     "xs",
-    //     "sm",
-    //     "md",
-    //     "lg",
-    //     "xl"],
-    //   values: {
-    //     xs: 0,
-    //     sm: 600,
-    //     md: 960,
-    //     lg: 1280,
-    //     xl: 1920,
-    //   },
-    // },
+    breakpoints: {
+        keys: [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl"],
+        values: {
+            xs: 0,
+            sm: 380,
+            md: 834,
+            lg: 1300,
+            xl: 1920,
+        },
+    },
+
     palette: {
         primary: {
             main: "#ABABAB", // main theme grey color
@@ -26,10 +27,9 @@ const theme = createMuiTheme({
             favourite: "#FF6767", // pink color
         },
     },
-    spacing: 8,
+    // spacing: 8,
 
     typography: {
-
         fontSize: 18,
         lineHeight: 26,
 
@@ -48,7 +48,6 @@ const theme = createMuiTheme({
     },
 
     overrides: {
-
         MuiButton: {
             root: {
                 fontSize: "13px",
@@ -56,7 +55,7 @@ const theme = createMuiTheme({
             },
             text: {
                 border: "2px solid #F8F8F8",
-// box-sizing: border-box;
+                boxSizing: "border-box",
                 borderRadius: "6px",
                 textTransform: "uppercase",
                 fontSize: "12px",
@@ -76,11 +75,7 @@ const theme = createMuiTheme({
                 fontWeight: "bold",
                 fontSize: "16px",
                 color: "#FFFFFF",
-
-
-                "&:hover": {
-
-                },
+                "&:hover": {},
             },
 
         },

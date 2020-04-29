@@ -62,7 +62,18 @@ const FindPanel = () => {
                 console.log(err);
             });
     };
-
+    // const search = () => {
+    //     console.log(searchParam);
+    //     axios
+    //         .get("https://api.chucknorris.io/jokes/random?category=dev")
+    //         .then(resp => {
+    //             console.log(resp);
+    //             setJokeData(resp.data)
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         });
+    // }
     const search = () => {
         console.log(searchParam);
         axios

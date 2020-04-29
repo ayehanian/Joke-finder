@@ -9,32 +9,15 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
-    details: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    content: {
-        flex: '1 0 auto',
-    },
-    cover: {
-        width: 151,
-    },
-    controls: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingLeft: theme.spacing(1),
-        paddingBottom: theme.spacing(1),
-    },
-    playIcon: {
-        height: 38,
-        width: 38,
-    },
+    root: {},
+
+
 }));
 
 const JokeCard = ({jokeInfo}) => {
+    console.log(jokeInfo.categories);
+
+
     const classes = useStyles();
 
     function calcHours(date) {
@@ -49,7 +32,7 @@ const JokeCard = ({jokeInfo}) => {
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
                         <IconButton aria-label="Favorite Icon">
-                           <FavoriteBorderIcon/>
+                            <FavoriteBorderIcon/>
                         </IconButton>
                         <IconButton aria-label="Message Icon">
                             <ChatOutlinedIcon/>
@@ -58,13 +41,18 @@ const JokeCard = ({jokeInfo}) => {
                             ID:{jokeInfo.id}
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
-                        {jokeInfo.value}
-                    </Typography>
+                            {jokeInfo.value}
+                        </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
                             Last update: {calcHours(jokeInfo.updated_at)} hours ago
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
-                            celebrity
+                          {/*{  jokeInfo.categories[0]}*/}
+                            {/*{jokeInfo.categories.length === 0 ?*/}
+                            {/*    jokeInfo.categories.map((category, index) => <p*/}
+                            {/*        key={index + category}>{category}</p>)*/}
+                            {/*    :*/}
+                            {/*    null}*/}
                         </Typography>
                     </CardContent>
                 </div>
@@ -75,7 +63,7 @@ const JokeCard = ({jokeInfo}) => {
 
     return (
         <div>
-            {cardContent()}
+            {jokeInfo === undefined ? null : cardContent()}
             {/*<a>ID:{jokeInfo.id} </a>*/}
             {/*<p>{jokeInfo.value}</p>*/}
             {/*/!*{jokeInfo.categories.map((category)=> <p>{category}</p>*!/*/}
