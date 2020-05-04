@@ -1,22 +1,31 @@
 import React, {useState} from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 import InputBase from "@material-ui/core/InputBase";
 
+import {
+    searchPhrases,
+    searchPhrasesFailure,
+} from "../../store/actions/Search";
 
-const CustomizedSearch = () => {
+
+const CustomizedSearch = ({ searchPhrases, searchPhrasesFailure }) => {
 
     const [text, setText] = useState({query: ""});
 
     // const [enter, setEnter] = useState(false);
 
     function search() {
+
         axios
             .get(`https://api.chucknorris.io/jokes/search?query=${text.query}`)
             .then(resp => {
                 console.log(resp);
+                searchPhrases(resp.data);
             })
             .catch(err => {
                 console.log(err);
+                searchPhrasesFailure(err);
             });
     }
 
@@ -37,7 +46,9 @@ const CustomizedSearch = () => {
     );
 };
 
-export default CustomizedSearch;
+export default connect(null, { searchPhrases, searchPhrasesFailure })(
+    CustomizedSearch
+);
 /*
 
 import React, {useState} from "react";
