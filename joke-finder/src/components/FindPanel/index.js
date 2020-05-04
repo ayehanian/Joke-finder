@@ -37,8 +37,10 @@ const FindPanel = () => {
         search();
     }, []);
 
-    const [categories, setCategories] = useState([]);
     const [JokeData, setJokeData] = useState({});
+    const [categories, setCategories] = useState([]);
+    const [chosenCategory, setChosenCategorys] = useState("animal");
+
     const [searchParam,setSearchParam] = useState('random');
 
     const handleChange = (event) => {

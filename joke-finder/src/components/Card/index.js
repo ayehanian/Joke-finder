@@ -52,12 +52,10 @@ const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites})
             <Card className={classes.root}>
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
-
                         <IconButton aria-label="Favorite Icon" onClick={() => toggleCardToFav(jokeInfo)}>
                             {favourites.includes(jokeInfo) ? <FavoriteIcon className={classes.heartIcon}/> :
                                 <FavoriteBorderIcon className={classes.heartIcon}/>}
                         </IconButton>
-                        <button onClick={() => console.log(favourites)}>is???</button>
                         <IconButton aria-label="Message Icon">
                             <ChatOutlinedIcon/>
                         </IconButton>

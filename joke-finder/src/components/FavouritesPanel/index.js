@@ -1,38 +1,23 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import JokeCard from "../Card";
-import axios from "axios";
+import {connect} from "react-redux";
 
 
-const FavouritesPanel = () => {
-
-
-    useEffect(() => {
-        search()
-    }, []);
-
-
-    const [JokeData, setJokeData] = useState({});
-
-
-    const search = () => {
-
-        axios
-            .get("https://api.chucknorris.io/jokes/random")
-            .then(resp => {
-                console.log(resp);
-                setJokeData(resp.data)
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
-
+const FavouritesPanel = ({favourites}) => {
 
     return (
         <div style={{border: "2px solid black"}}>
-            <JokeCard jokeInfo={JokeData}/>
+            {favourites.map(item => {
+                return <JokeCard jokeInfo={item}/>
+            })}
         </div>
     );
 };
 
-export default FavouritesPanel;
+function mapStateToProps(state) {
+    return {
+        favourites: state.favouritesReducer.favourites,
+    };
+}
+
+export default connect(mapStateToProps)(FavouritesPanel);
