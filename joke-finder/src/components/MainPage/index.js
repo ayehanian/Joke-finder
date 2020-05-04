@@ -22,8 +22,7 @@ const MainPage = () => {
     const burgerMenuAdaptive = useMediaQuery(theme => theme.breakpoints.down('md'));
 
     return (
-        <div>
-            <div className={classes.root}>
+        <>
                 <Grid container spacing={3}>
                     <Grid item xs={12} lg={8}>
                         <Typography component="h3" className={classes.text}>MSI 2020</Typography>
@@ -36,8 +35,7 @@ const MainPage = () => {
                         </Grid>
                     )}
                 </Grid>
-            </div>
-        </div>
+        </>
     );
 };
 

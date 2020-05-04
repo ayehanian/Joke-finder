@@ -25,17 +25,16 @@ const useStyles = makeStyles((theme) => ({
 const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites}) => {
     const classes = useStyles();
 
-    function calcHours(date) {
+    const calcHours = date => {
         let hours = Date.now() - Date.parse(date);
         return Math.round(hours / 3600000);
-    }
+    };
 
-    function toggleCardToFav(card) {
+    const toggleCardToFav = card => {
         favourites.includes(card) ? (deleteFromFavourites(card)) : (addToFavourites(card));
-    }
+    };
 
     const cardCategories = () => {
-
         if (jokeInfo.categories) {
             return (
                 jokeInfo.categories.map((category, index) => {
@@ -78,9 +77,9 @@ const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites})
     };
 
     return (
-        <div>
+        <>
             {jokeInfo === undefined ? null : cardContent()}
-        </div>
+        </>
     );
 };
 

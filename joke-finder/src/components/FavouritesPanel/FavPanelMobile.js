@@ -60,7 +60,7 @@ const FavouritesPanelMobile = () => {
     );
 
     return (
-        <div>
+        <>
             <IconButton
                 edge="start"
                 color="inherit"
@@ -79,7 +79,7 @@ const FavouritesPanelMobile = () => {
             >
                 {sideList("right")}
             </SwipeableDrawer>
-        </div>
+        </>
     );
 };
 

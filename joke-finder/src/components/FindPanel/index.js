@@ -1,25 +1,25 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import JokeCard from "../Card";
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-
 import Button from '@material-ui/core/Button';
 
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+
+import JokeCard from "../Card";
 import CustomizedSearch from "../Search";
+
 
 const useStyles = makeStyles((theme) => ({
     // checked: {
     //     backgroundColor: 'black',
     //     color: 'black',
     // },
-    button: {
-    },
+    button: {},
     root: {
         '&checked': {
             backgroundColor: 'black',
@@ -39,9 +39,9 @@ const FindPanel = () => {
 
     const [JokeData, setJokeData] = useState({});
     const [categories, setCategories] = useState([]);
-    const [chosenCategory, setChosenCategorys] = useState("animal");
+    const [chosenCategory, setChosenCategory] = useState("animal");
 
-    const [searchParam,setSearchParam] = useState('random');
+    const [searchParam, setSearchParam] = useState('random');
 
     const handleChange = (event) => {
         setSearchParam(event.target.value);
@@ -73,12 +73,12 @@ const FindPanel = () => {
         // console.log(searchParam);
         let query = "";
 
-        if(searchParam==="random"){
+        if (searchParam === "random") {
             query = "random";
-        }else if (searchParam==="categories"){
-           query = "random?category=dev"
+        } else if (searchParam === "categories") {
+            query = "random?category=dev"
         }
-        
+
         axios
             .get(`https://api.chucknorris.io/jokes/${query}`)
             .then(resp => {
@@ -95,17 +95,17 @@ const FindPanel = () => {
             <Typography component="h2">Hey!</Typography>
             <Typography component="h3">Let’s try to find a joke for you:</Typography>
             {/*<form onSubmit={search}>*/}
-            <FormControl component="fieldset" >
+            <FormControl component="fieldset">
                 <RadioGroup aria-label="joke type" name="joke" value={searchParam} onChange={handleChange}>
                     <FormControlLabel value="random" control={<Radio color="default" label="Random"/>} label="Random"/>
                     <FormControlLabel value="categories" control={<Radio color="default"/>} label="From categories"/>
-                    {searchParam ==="categories" &&
-                        categories.map((category, index)=>{
-                        return(  <Button key={index+category} variant="text">{category}</Button>)
+                    {searchParam === "categories" &&
+                    categories.map((category, index) => {
+                        return (<Button key={index + category} variant="text">{category}</Button>)
                     })
                     }
                     <FormControlLabel value="search" control={<Radio color="default"/>} label="Search"/>
-                    {searchParam ==="search" && <CustomizedSearch/> }
+                    {searchParam === "search" && <CustomizedSearch/>}
                 </RadioGroup>
                 <Button
                     className={classes.button}
