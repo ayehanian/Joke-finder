@@ -18,9 +18,7 @@ import * as serviceWorker from './serviceWorker';
 const persistedState = loadState();
 const store = createStore(rootReducer, persistedState);
 
-store.subscribe(()=>{
-
-    console.log(store.getState())
+store.subscribe(() => {
     saveState({favouritesReducer: store.getState().favouritesReducer});
 });
 

@@ -30,10 +30,6 @@ const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites})
         return Math.round(hours / 3600000);
     };
 
-    const toggleCardToFav = card => {
-        favourites.includes(card) ? (deleteFromFavourites(card)) : (addToFavourites(card));
-    };
-
     const cardCategories = () => {
         if (jokeInfo.categories) {
             return (
@@ -44,6 +40,10 @@ const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites})
         } else {
             return null
         }
+    };
+
+    const toggleCardToFav = card => {
+        favourites.includes(card) ? (deleteFromFavourites(card)) : (addToFavourites(card));
     };
 
     const cardContent = () => {

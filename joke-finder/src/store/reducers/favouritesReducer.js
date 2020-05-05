@@ -5,7 +5,7 @@ const initialState = {
 const favouritesReducer = (state = initialState, action) => {
     switch (action.type) {
         case "ADD_TO_FAV_SUCCESS":
-            const extendedArr = [...state.favourites, action.payload];
+            const extendedArr = [action.payload, ...state.favourites];
             return {...state, favourites: extendedArr};
         case  "DELETE_FROM_FAV_SUCCESS":
             const index = state.favourites.findIndex((element) => element.id === action.payload.id);
