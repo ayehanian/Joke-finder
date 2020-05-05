@@ -19,11 +19,10 @@ const persistedState = loadState();
 const store = createStore(rootReducer, persistedState);
 
 store.subscribe(()=>{
-    saveState({
-        favourites: store.getState().favourites
-    });
-});
 
+    console.log(store.getState())
+    saveState({favouritesReducer: store.getState().favouritesReducer});
+});
 
 ReactDOM.render(
     <ThemeProvider theme={theme}>

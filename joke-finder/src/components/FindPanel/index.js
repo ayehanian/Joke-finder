@@ -6,12 +6,15 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import FormGroup from '@material-ui/core/FormGroup';
 
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
 import JokeCard from "../Card";
 import CustomizedSearch from "../Search";
+import CategoriesPanel from "./CategoriesPanel";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,52 +36,47 @@ const FindPanel = () => {
     const classes = useStyles();
 
     useEffect(() => {
-        getCategories();
-        search();
+        // getCategories();
+        // search();
+        req("random");
     }, []);
 
     const [JokeData, setJokeData] = useState({});
-    const [categories, setCategories] = useState([]);
-    const [chosenCategory, setChosenCategory] = useState("animal");
-
+    // const [categories, setCategories] = useState([]);
     const [searchParam, setSearchParam] = useState('random');
+    // const [chosenCategory, setChosenCategory] = useState("animal");
 
     const handleChange = (event) => {
         setSearchParam(event.target.value);
     };
+    // const handleChange2 = (event) => {
+    //     setChosenCategory(event.target.value);
+    //     console.log(chosenCategory);
+    // };
 
-    const getCategories = () => {
-        axios
-            .get("https://api.chucknorris.io/jokes/categories")
-            .then(resp => {
-                setCategories(resp.data)
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    };
-    // const search = () => {
-    //     console.log(searchParam);
+    // const getCategories = () => {
     //     axios
-    //         .get("https://api.chucknorris.io/jokes/random?category=dev")
+    //         .get("https://api.chucknorris.io/jokes/categories")
     //         .then(resp => {
-    //             console.log(resp);
-    //             setJokeData(resp.data)
+    //             setCategories(resp.data)
     //         })
     //         .catch(err => {
     //             console.log(err);
     //         });
-    // }
-    const search = () => {
-        // console.log(searchParam);
-        let query = "";
+    // };
 
+    const search = () => {
+        let query = "";
         if (searchParam === "random") {
             query = "random";
         } else if (searchParam === "categories") {
-            query = "random?category=dev"
+            // query = `random?category=${chosenCategory}`
         }
+        req(query);
 
+    };
+
+    const req = (query) => {
         axios
             .get(`https://api.chucknorris.io/jokes/${query}`)
             .then(resp => {
@@ -91,7 +89,7 @@ const FindPanel = () => {
     };
 
     return (
-        <div>
+        <>
             <Typography component="h2">Hey!</Typography>
             <Typography component="h3">Let’s try to find a joke for you:</Typography>
             {/*<form onSubmit={search}>*/}
@@ -99,11 +97,7 @@ const FindPanel = () => {
                 <RadioGroup aria-label="joke type" name="joke" value={searchParam} onChange={handleChange}>
                     <FormControlLabel value="random" control={<Radio color="default" label="Random"/>} label="Random"/>
                     <FormControlLabel value="categories" control={<Radio color="default"/>} label="From categories"/>
-                    {searchParam === "categories" &&
-                    categories.map((category, index) => {
-                        return (<Button key={index + category} variant="text">{category}</Button>)
-                    })
-                    }
+                    {searchParam === "categories" && <CategoriesPanel/>}
                     <FormControlLabel value="search" control={<Radio color="default"/>} label="Search"/>
                     {searchParam === "search" && <CustomizedSearch/>}
                 </RadioGroup>
@@ -120,7 +114,7 @@ const FindPanel = () => {
             {/*</form>*/}
 
             <JokeCard jokeInfo={JokeData}/>
-        </div>
+        </>
     );
 };
 

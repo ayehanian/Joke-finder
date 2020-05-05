@@ -8,7 +8,7 @@ const FavouritesPanel = ({favourites}) => {
     return (
         <>
             {favourites.map(item => {
-                return <JokeCard jokeInfo={item}/>
+                return <JokeCard key={item.id} jokeInfo={item}/>
             })}
         </>
     );
