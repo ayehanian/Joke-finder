@@ -1,15 +1,29 @@
 import React from "react";
-import JokeCard from "../Card";
 import {connect} from "react-redux";
+import Typography from "@material-ui/core/Typography";
 
+import JokeCard from "../Card";
 
 const FavouritesPanel = ({favourites}) => {
 
+
+    const emptyStub = () => {
+        return (
+            <>
+                <Typography>There is no favourite jokes...</Typography>
+                <Typography>Try to choose some!</Typography>
+            </>
+        )
+    };
+
     return (
         <>
-            {favourites.map(item => {
-                return <JokeCard key={item.id} jokeInfo={item}/>
-            })}
+            <Typography>Favourite</Typography>
+            {favourites.length === 0 ? emptyStub() :
+                favourites.map(item => {
+                    return <JokeCard key={item.id} jokeInfo={item}/>
+                })
+            }
         </>
     );
 };

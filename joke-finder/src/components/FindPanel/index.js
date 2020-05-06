@@ -6,6 +6,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 
@@ -32,8 +33,9 @@ const useStyles = makeStyles((theme) => ({
 const FindPanel = ({chosenCategory}) => {
     const classes = useStyles();
 
+    const [isDataLoading, setLoading] = useState(false);
     const [JokeData, setJokeData] = useState([]);
-    const [searchParam, setSearchParam] = useState('random');
+    const [searchJokeParam, setSearchJokeParam] = useState('random');
     const [freeSearchText, setFreeSearchText] = useState({query: ""});
 
     useEffect(() => {
@@ -45,14 +47,15 @@ const FindPanel = ({chosenCategory}) => {
     };
 
     const handleChange = (event) => {
-        setSearchParam(event.target.value);
+        setSearchJokeParam(event.target.value);
     };
 
     const search = () => {
+        setLoading(true);
         let query = "";
-        if (searchParam === "random") {
+        if (searchJokeParam === "random") {
             query = "random";
-        } else if (searchParam === "categories") {
+        } else if (searchJokeParam === "categories") {
             query = `random?category=${chosenCategory}`
         } else {
             query = `search?query=${freeSearchText.query}`
@@ -64,7 +67,8 @@ const FindPanel = ({chosenCategory}) => {
         axios
             .get(`https://api.chucknorris.io/jokes/${query}`)
             .then(resp => {
-                searchParam === "search" ? setJokeData(resp.data.result) : setJokeData([resp.data]) ;
+                searchJokeParam === "search" ? setJokeData(resp.data.result) : setJokeData([resp.data]);
+                setLoading(false);
             })
             .catch(err => {
                 console.log(err);
@@ -78,15 +82,15 @@ const FindPanel = ({chosenCategory}) => {
     //     onKeyPress={event => onEnter(event)}
     // >
     const formContent = () => {
-    return(
-        <FormControl component="fieldset">
+        return (
+            <FormControl component="fieldset">
 
-            <RadioGroup aria-label="joke type" name="joke" value={searchParam} onChange={handleChange}>
-                <FormControlLabel value="random" control={<Radio color="default" label="Random"/>} label="Random"/>
-                <FormControlLabel value="categories" control={<Radio color="default"/>} label="From categories"/>
-                {searchParam === "categories" && <CategoriesPanel/>}
-                <FormControlLabel value="search" control={<Radio color="default"/>} label="Search"/>
-                {searchParam === "search" &&
+                <RadioGroup aria-label="joke type" name="joke" value={searchJokeParam} onChange={handleChange}>
+                    <FormControlLabel value="random" control={<Radio color="default" label="Random"/>} label="Random"/>
+                    <FormControlLabel value="categories" control={<Radio color="default"/>} label="From categories"/>
+                    {searchJokeParam === "categories" && <CategoriesPanel/>}
+                    <FormControlLabel value="search" control={<Radio color="default"/>} label="Search"/>
+                    {searchJokeParam === "search" &&
 
                     <InputBase
                         placeholder="Free text search..."
@@ -99,40 +103,40 @@ const FindPanel = ({chosenCategory}) => {
                     />
 
 
-               /* <TextValidator
-                    placeholder="Free text search..."
-                    onChange={searchChange("query")}
-                    // inputProps={{'aria-label': 'search'}}
-                    value={freeSearchText.query}
+                        /* <TextValidator
+                             placeholder="Free text search..."
+                             onChange={searchChange("query")}
+                             // inputProps={{'aria-label': 'search'}}
+                             value={freeSearchText.query}
 
-                    // variant="outlined"
-                    // size="small"
+                             // variant="outlined"
+                             // size="small"
 
 
-                    // validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
-                    // errorMessages={[
-                    //     "This field is required",
-                    //     "Please type 3-22 characters, including only latin letters and numbers",
-                    // ]}
-                    validators={["required", 'minNumber:3', 'maxNumber:20']}
-                    errorMessages={[
-                        "This field is required", "Minimum 3 characters",  "Max 20 characters",
-                    ]}
-                    />*/
-                }
-            </RadioGroup>
-            <Button
-                className={classes.button}
-                type="submit"
-                variant="contained"
-                aria-label="find"
-                onClick={search}
-            >
-                Get a joke
-            </Button>
-        </FormControl>
+                             // validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
+                             // errorMessages={[
+                             //     "This field is required",
+                             //     "Please type 3-22 characters, including only latin letters and numbers",
+                             // ]}
+                             validators={["required", 'minNumber:3', 'maxNumber:20']}
+                             errorMessages={[
+                                 "This field is required", "Minimum 3 characters",  "Max 20 characters",
+                             ]}
+                             />*/
+                    }
+                </RadioGroup>
+                <Button
+                    className={classes.button}
+                    type="submit"
+                    variant="contained"
+                    aria-label="find"
+                    onClick={search}
+                >
+                    Get a joke
+                </Button>
+            </FormControl>
 
-    )
+        )
     };
 
     return (
@@ -140,9 +144,13 @@ const FindPanel = ({chosenCategory}) => {
             <Typography component="h2">Hey!</Typography>
             <Typography component="h3">Let’s try to find a joke for you:</Typography>
             {formContent()}
-            {JokeData.map((joke)=>{
-                return <JokeCard key={joke.id} jokeInfo={joke}/>
-            })}
+            <div>
+                { isDataLoading ? <CircularProgress/> :
+                JokeData.map((joke) => {
+                    return <JokeCard key={joke.id} jokeInfo={joke}/>
+                })
+            }
+            </div>
 
         </>
     );

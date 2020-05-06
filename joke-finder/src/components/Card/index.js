@@ -6,20 +6,28 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Launch from '@material-ui/icons/Launch';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import {connect} from "react-redux";
 import {addToFavourites, deleteFromFavourites} from "../../store/actions/Favourites";
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {},
-    heartIcon: {
-        color: theme.palette.primary.favourite
-    },
-    fav: {
-        backgroundColor: theme.palette.primary.favourite
-    },
-}));
+        root: {},
+        heartIcon: {
+            color: theme.palette.primary.favourite
+        },
+        fav: {
+            backgroundColor: theme.palette.primary.favourite
+        },
+        idLink: {
+            // "&:after": {
+            //     content: "url('/images/external.png')",
+            //     paddingLeft: "5px"
+            // }
+        }
+    }))
+;
 
 
 const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites}) => {
@@ -42,8 +50,12 @@ const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites})
         }
     };
 
+    const isInFav = (card) => {
+        return favourites.find((element) => element.id === card.id);
+    };
+
     const toggleCardToFav = card => {
-        favourites.includes(card) ? (deleteFromFavourites(card)) : (addToFavourites(card));
+        isInFav(card) === undefined ? addToFavourites(card) : deleteFromFavourites(card)
     };
 
     const cardContent = () => {
@@ -52,14 +64,15 @@ const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites})
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
                         <IconButton aria-label="Favorite Icon" onClick={() => toggleCardToFav(jokeInfo)}>
-                            {favourites.includes(jokeInfo) ? <FavoriteIcon className={classes.heartIcon}/> :
-                                <FavoriteBorderIcon className={classes.heartIcon}/>}
+                            {isInFav(jokeInfo) === undefined ? <FavoriteBorderIcon className={classes.heartIcon}/> :
+                                <FavoriteIcon className={classes.heartIcon}/>}
                         </IconButton>
                         <IconButton aria-label="Message Icon">
                             <ChatOutlinedIcon/>
                         </IconButton>
-                        <Typography component="h5" variant="h5">
+                        <Typography component="h5" variant="h5" className={classes.idLink}>
                             ID:{jokeInfo.id}
+                            <Launch/>
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
                             {jokeInfo.value}
