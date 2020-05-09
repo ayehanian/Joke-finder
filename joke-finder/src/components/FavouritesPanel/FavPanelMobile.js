@@ -11,14 +11,18 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import FavouritesPanel from "./index";
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     list: {
-        width: 250,
+        width: "100vw",
+        [theme.breakpoints.up("sm")]: {
+            width: "480px",
+        },
     },
     fullList: {
         width: 'auto',
+
     },
-});
+}));
 
 
 const FavouritesPanelMobile = () => {
@@ -70,7 +74,7 @@ const FavouritesPanelMobile = () => {
             >
                 <MenuIcon/>
             </IconButton>
-          <Typography className={classes.sideMenuTitle}>Favourite</Typography>
+            <Typography className={classes.sideMenuTitle}>Favourite</Typography>
             <SwipeableDrawer
                 anchor="right"
                 open={state["right"]}

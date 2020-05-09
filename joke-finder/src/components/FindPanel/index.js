@@ -9,24 +9,33 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
-
-//  import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-
-import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import {Box} from "@material-ui/core";
+//  import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import {makeStyles} from "@material-ui/core/styles";
 
 import JokeCard from "../Card";
 import CategoriesPanel from "./CategoriesPanel";
 
 
 const useStyles = makeStyles((theme) => ({
-    button: {},
     root: {
-        '&checked': {
-            backgroundColor: 'black',
-            color: 'black',
+        display: "flex",
+        flexDirection: "column",
+
+        [theme.breakpoints.up("sm")]: {
+            padding: theme.spacing(0,4),
+        },
+        [theme.breakpoints.up("md")]: {
+            padding: theme.spacing(0,14),
         },
     },
+    // root: {
+    //     '&checked': {
+    //         backgroundColor: 'black',
+    //         color: 'black',
+    //     },
+    // },
     checked: {},
 }));
 
@@ -140,19 +149,19 @@ const FindPanel = ({chosenCategory}) => {
     };
 
     return (
-        <>
+        <Box className={classes.root}>
             <Typography component="h2">Hey!</Typography>
             <Typography component="h3">Let’s try to find a joke for you:</Typography>
             {formContent()}
-            <div>
+            {/*<Box>*/}
                 { isDataLoading ? <CircularProgress/> :
-                JokeData.map((joke) => {
-                    return <JokeCard key={joke.id} jokeInfo={joke}/>
-                })
-            }
-            </div>
+                    JokeData.map((joke) => {
+                        return <JokeCard key={joke.id} jokeInfo={joke} variant="elevation"/>
+                    })
+                }
+            {/*</Box>*/}
 
-        </>
+        </Box>
     );
 };
 

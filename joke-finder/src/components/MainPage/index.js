@@ -1,10 +1,12 @@
 import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
+
 import Typography from "@material-ui/core/Typography";
-import FindPanel from "../FindPanel";
 import Grid from "@material-ui/core/Grid";
-import FavouritesPanel from "../FavouritesPanel";
+import {makeStyles} from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+import FavouritesPanel from "../FavouritesPanel";
+import FindPanel from "../FindPanel";
 import FavouritesPanelMobile from "../FavouritesPanel/FavPanelMobile";
 
 const useStyles = makeStyles((theme) => ({
