@@ -14,8 +14,7 @@ import {Box} from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
-        flexWrap: "wrap"
-        // flexDirection: "column",
+        flexWrap: "wrap",
     },
     listItem: {
         display: "inline",
@@ -64,7 +63,7 @@ const CategoriesPanel = ({chooseCategory, chosenCategory}) => {
     };
 
     return (
-        <Box >
+        <Box>
             <List className={classes.root}>
                 {categories.map((category, index) => {
                         return (

@@ -5,14 +5,16 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 
-import MenuIcon from "@material-ui/icons/Menu";
-import CloseIcon from "@material-ui/icons/Close";
+import DragHandleRoundedIcon from '@material-ui/icons/DragHandleRounded';
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import FavouritesPanel from "./index";
-
+// import Box from "@material-ui/core/Box";
+import {Box} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     list: {
+        backgroundColor: theme.palette.primary.light,
         width: "100vw",
         [theme.breakpoints.up("sm")]: {
             width: "480px",
@@ -20,7 +22,22 @@ const useStyles = makeStyles((theme) => ({
     },
     fullList: {
         width: 'auto',
-
+    },
+    sideMenuHeader: {
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center",
+    },
+    sideMenuHeaderPadding:{
+        padding: theme.spacing(2),
+    },
+    sideMenuTitle: {
+        fontSize: theme.spacing(2),
+        paddingLeft: theme.spacing(1),
+    },
+    toggleBtn: {
+        backgroundColor: "#333333",
+        color: "#FFFFFF",
     },
 }));
 
@@ -50,31 +67,33 @@ const FavouritesPanelMobile = () => {
              onKeyDown={toggleDrawer(anchor, false)}
         >
             <div className={classes.sideMenuHeader}>
-                <Typography className={classes.sideMenuTitle}>Favourite</Typography>
                 <IconButton
-                    color="inherit"
                     aria-label="close drawer"
+                    size="small"
+                    className={classes.toggleBtn}
                     onClick={toggleDrawer(anchor, false)}
                 >
-                    <CloseIcon/>
+                    <CloseRoundedIcon fontSize="small"/>
                 </IconButton>
+                <Typography variant="subtitle1" className={`${classes.sideMenuTitle} ${classes.sideMenuHeaderPadding}`}>Favourite</Typography>
             </div>
             <FavouritesPanel/>
         </div>
     );
 
     return (
-        <>
+        <Box className={classes.sideMenuHeader}>
             <IconButton
                 edge="start"
-                color="inherit"
                 aria-label="open drawer"
+                size="small"
+                className={classes.toggleBtn}
                 onClick={toggleDrawer("right", true)}
                 href=''
             >
-                <MenuIcon/>
+                <DragHandleRoundedIcon fontSize="small"/>
             </IconButton>
-            <Typography className={classes.sideMenuTitle}>Favourite</Typography>
+            <Typography variant="subtitle1" className={classes.sideMenuTitle}>Favourite</Typography>
             <SwipeableDrawer
                 anchor="right"
                 open={state["right"]}
@@ -83,7 +102,7 @@ const FavouritesPanelMobile = () => {
             >
                 {sideList("right")}
             </SwipeableDrawer>
-        </>
+        </Box>
     );
 };
 

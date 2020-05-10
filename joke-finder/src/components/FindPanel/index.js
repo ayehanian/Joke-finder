@@ -22,12 +22,33 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
         flexDirection: "column",
-
+        padding: theme.spacing(0, 2),
         [theme.breakpoints.up("sm")]: {
-            padding: theme.spacing(0,4),
+            padding: theme.spacing(0, 4),
         },
         [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(0,14),
+            padding: theme.spacing(0, 14),
+        },
+        // padding: theme.spacing(2, 2),
+        // [theme.breakpoints.up("sm")]: {
+        //     padding: theme.spacing(4, 4),
+        // },
+        // [theme.breakpoints.up("md")]: {
+        //     padding: theme.spacing(4, 14),
+        // },
+    },
+
+    // pageTitle: {
+    //     paddingBottom: theme.spacing(7.8),
+    //     fontSize: "20px",
+    //     fontWeight: "bold",
+    //     lineHeight: "28px",
+    //     textTransform: "uppercase",
+    // },
+    form: {
+        padding: theme.spacing(4.3,0, 2),
+        [theme.breakpoints.up("sm")]: {
+            padding: theme.spacing(4.3,0, 4),
         },
     },
     // root: {
@@ -37,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
     //     },
     // },
     checked: {},
+
 }));
 
 const FindPanel = ({chosenCategory}) => {
@@ -92,10 +114,10 @@ const FindPanel = ({chosenCategory}) => {
     // >
     const formContent = () => {
         return (
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" className={classes.form}>
 
                 <RadioGroup aria-label="joke type" name="joke" value={searchJokeParam} onChange={handleChange}>
-                    <FormControlLabel value="random" control={<Radio color="default" label="Random"/>} label="Random"/>
+                    <FormControlLabel value="random" control={<Radio color="default"/>} label="Random"/>
                     <FormControlLabel value="categories" control={<Radio color="default"/>} label="From categories"/>
                     {searchJokeParam === "categories" && <CategoriesPanel/>}
                     <FormControlLabel value="search" control={<Radio color="default"/>} label="Search"/>
@@ -110,7 +132,6 @@ const FindPanel = ({chosenCategory}) => {
                         // onError={setIsTooltipOpen(true)}
                         // error={freeSearchText.query===""}
                     />
-
 
                         /* <TextValidator
                              placeholder="Free text search..."
@@ -150,17 +171,18 @@ const FindPanel = ({chosenCategory}) => {
 
     return (
         <Box className={classes.root}>
-            <Typography component="h2">Hey!</Typography>
-            <Typography component="h3">Let’s try to find a joke for you:</Typography>
-            {formContent()}
+            {/*<Typography component="h3" className={classes.pageTitle}>MSI 2020</Typography>*/}
             {/*<Box>*/}
-                { isDataLoading ? <CircularProgress/> :
-                    JokeData.map((joke) => {
-                        return <JokeCard key={joke.id} jokeInfo={joke} variant="elevation"/>
-                    })
-                }
-            {/*</Box>*/}
+            <Typography variant="h2">Hey!</Typography>
+            <Typography variant="h3">Let’s try to find a joke for you:</Typography>
+            {formContent()}
 
+            {isDataLoading ? <CircularProgress/> :
+                JokeData.map((joke) => {
+                    return <JokeCard key={joke.id} jokeInfo={joke} variant="elevation"/>
+                })
+            }
+            {/*</Box>*/}
         </Box>
     );
 };

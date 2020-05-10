@@ -19,10 +19,7 @@ import {addToFavourites, deleteFromFavourites} from "../../store/actions/Favouri
 const useStyles = makeStyles((theme) => ({
         root: {
             padding: theme.spacing(1),
-            margin: theme.spacing(2, 0),
-            [theme.breakpoints.up("sm")]: {
-                margin: theme.spacing(2, 0),
-            },
+            marginTop: theme.spacing(2),
             display: "flex",
             flexDirection: "column",
         },
@@ -62,17 +59,17 @@ const useStyles = makeStyles((theme) => ({
         disabled: {},
 
 
-
         categoryBox: {
             display: "inline-block",
             padding: theme.spacing(0.6, 2),
-            marginTop: "10px",
+            marginTop: theme.spacing(1),
             borderRadius: "6px",
             backgroundColor: "#FFFFFF",
-            fontSize: "10px",
-            fontWeight: 500,
             letterSpacing: "2px",
             textTransform: "uppercase",
+            [theme.breakpoints.up("sm")]: {
+                marginTop: 0,
+            },
         },
 
         greyBackgroundColor: {
@@ -86,13 +83,29 @@ const useStyles = makeStyles((theme) => ({
         fav: {
             backgroundColor: theme.palette.primary.favourite
         },
+        jokeValue: {
+            padding: "5px 0 28px"
+        },
         idLink: {
             fontSize: "10px"
             // "&:after": {
             //     content: "url('/images/external.png')",
             //     paddingLeft: "5px"
             // }
-        }
+        },
+    cardFooter:{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "self-start",
+
+        [theme.breakpoints.up("sm")]: {
+            width: "100%",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+        },
+    },
     }))
 ;
 
@@ -110,6 +123,8 @@ const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFav
                 jokeInfo.categories.map((category, index) => {
                     return <Typography
                         key={index + category}
+                        component="span"
+                        variant="subtitle1"
                         className={`${classes.categoryBox} ${variant === "outlined" ? classes.greyBackgroundColor : null}`}
                     >
                         {category}
@@ -127,13 +142,6 @@ const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFav
 
     const toggleCardToFav = card => {
         isInFav(card) === undefined ? addToFavourites(card) : deleteFromFavourites(card)
-    };
-    const messIcon = ()=>{
-       if(variant === "outlined"){
-           return classes.chatBtn
-       } else {
-           return classes.chatBtnDark
-       }
     };
 
     const cardContent = () => {
@@ -180,18 +188,21 @@ const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFav
                         <Typography variant="subtitle1">
                             {/*className={classes.idLink}*/}
                             ID:
-                            <Link href="#" >
+                            <Link href="#">
                                 {jokeInfo.id}
                                 <Launch className={classes.idLink}/>
                             </Link>
                         </Typography>
-                        <Typography variant={variant === "outlined" ? "body1" : "body2"}>
+                        <Typography variant={variant === "outlined" ? "body2" : "body1"}
+                                    className={variant === "outlined" ? null : classes.jokeValue}>
                             {jokeInfo.value}
                         </Typography>
-                        <Typography variant="subtitle1">
-                            Last update: {calcHours(jokeInfo.updated_at)} hours ago
-                        </Typography>
-                        {cardCategories()}
+                        <Box className={classes.cardFooter}>
+                            <Typography variant="subtitle1">
+                                Last update: {calcHours(jokeInfo.updated_at)} hours ago
+                            </Typography>
+                            {cardCategories()}
+                        </Box>
                     </Box>
                 </CardContent>
             </Card>
