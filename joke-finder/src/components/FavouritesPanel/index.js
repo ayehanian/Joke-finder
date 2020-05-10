@@ -10,18 +10,25 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: theme.palette.primary.light,
-        padding: theme.spacing(0,2),
+        height: "100vh",
+        padding: theme.spacing(0, 2, 2),
         [theme.breakpoints.up("sm")]: {
-            padding: theme.spacing(0,4),
+            padding: theme.spacing(0, 4, 4),
         },
         [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(2,4),
+            padding: theme.spacing(2, 4, 4),
         },
     },
     sideMenuTitle: {
         fontSize: theme.spacing(2),
         marginBottom: theme.spacing(2),
     },
+    emptyStub: {
+        padding: theme.spacing(2),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    }
 }));
 
 
@@ -32,16 +39,17 @@ const FavouritesPanel = ({favourites}) => {
 
     const emptyStub = () => {
         return (
-            <>
-                <Typography>There is no favourite jokes...</Typography>
-                <Typography>Try to choose some!</Typography>
-            </>
+            <Box className={classes.emptyStub}>
+                <Typography variant="body1">Oh, there is no favourite jokes...</Typography>
+                <Typography variant="body1">Try to choose some!</Typography>
+            </Box>
         )
     };
 
     return (
         <Box className={classes.root}>
-            {isDesktop ?  <Typography variant="subtitle1" className={classes.sideMenuTitle}>Favourite</Typography>: null}
+            {isDesktop ?
+                <Typography variant="subtitle1" className={classes.sideMenuTitle}>Favourite</Typography> : null}
             {favourites.length === 0 ? emptyStub() :
                 favourites.map(item => {
                     return <JokeCard key={item.id} jokeInfo={item} variant="outlined"/>

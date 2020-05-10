@@ -63,8 +63,6 @@ const FavouritesPanelMobile = () => {
 
         <div className={clsx(classes.list, {[classes.fullList]: anchor === 'top' || anchor === 'bottom',})}
              role="presentation"
-             onClick={toggleDrawer(anchor, false)}
-             onKeyDown={toggleDrawer(anchor, false)}
         >
             <div className={classes.sideMenuHeader}>
                 <IconButton
@@ -75,7 +73,13 @@ const FavouritesPanelMobile = () => {
                 >
                     <CloseRoundedIcon fontSize="small"/>
                 </IconButton>
-                <Typography variant="subtitle1" className={`${classes.sideMenuTitle} ${classes.sideMenuHeaderPadding}`}>Favourite</Typography>
+                <Typography
+                    variant="subtitle1"
+                    className={`${classes.sideMenuTitle} ${classes.sideMenuHeaderPadding}`}
+                    onClick={toggleDrawer(anchor, false)}
+                >
+                    Favourite
+                </Typography>
             </div>
             <FavouritesPanel/>
         </div>
@@ -93,7 +97,13 @@ const FavouritesPanelMobile = () => {
             >
                 <DragHandleRoundedIcon fontSize="small"/>
             </IconButton>
-            <Typography variant="subtitle1" className={classes.sideMenuTitle}>Favourite</Typography>
+            <Typography
+                variant="subtitle1"
+                className={classes.sideMenuTitle}
+                onClick={toggleDrawer("right", true)}
+            >
+                Favourite
+            </Typography>
             <SwipeableDrawer
                 anchor="right"
                 open={state["right"]}

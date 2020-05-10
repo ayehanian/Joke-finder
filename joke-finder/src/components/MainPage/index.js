@@ -15,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: theme.spacing(2, 2, 7.8),
+        padding: theme.spacing(2, 2, 0),
         [theme.breakpoints.up("sm")]: {
-            padding: theme.spacing(4, 4, 7.8),
+            padding: theme.spacing(4, 4, 0),
         },
         [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(4,14,7.8),
+            padding: theme.spacing(4,14,0),
         },
     },
     pageTitle: {

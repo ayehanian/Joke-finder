@@ -87,25 +87,32 @@ const useStyles = makeStyles((theme) => ({
             padding: "5px 0 28px"
         },
         idLink: {
-            fontSize: "10px"
+            color: "#8EA7FF",
+            textDecoration: "underline",
+            marginLeft: theme.spacing(0.25),
+        },
+
+        idLinkIcon: {
+            fontSize: theme.spacing(1),
+            marginLeft: theme.spacing(0.5),
             // "&:after": {
             //     content: "url('/images/external.png')",
             //     paddingLeft: "5px"
             // }
         },
-    cardFooter:{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        alignItems: "self-start",
+        cardFooter: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "self-start",
 
-        [theme.breakpoints.up("sm")]: {
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
+            [theme.breakpoints.up("sm")]: {
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+            },
         },
-    },
     }))
 ;
 
@@ -188,9 +195,9 @@ const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFav
                         <Typography variant="subtitle1">
                             {/*className={classes.idLink}*/}
                             ID:
-                            <Link href="#">
+                            <Link href="#" className={classes.idLink}>
                                 {jokeInfo.id}
-                                <Launch className={classes.idLink}/>
+                                <Launch className={classes.idLinkIcon}/>
                             </Link>
                         </Typography>
                         <Typography variant={variant === "outlined" ? "body2" : "body1"}

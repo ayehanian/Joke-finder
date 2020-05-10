@@ -9,6 +9,8 @@ import {makeStyles} from "@material-ui/core/styles";
 
 import {chooseCategory} from "../../store/actions/ChoosenCategory";
 import {Box} from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import JokeCard from "../Card";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     listItem: {
         display: "inline",
         padding: "6px 15px",
-        margin:"5px",
+        margin: "5px",
         border: "2px solid #F8F8F8",
         borderRadius: "6px",
         // boxSizing: "border-box",
@@ -43,8 +45,10 @@ const CategoriesPanel = ({chooseCategory, chosenCategory}) => {
     const classes = useStyles();
 
     const [categories, setCategories] = useState([]);
+    const [isDataLoading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         getCategories();
     }, []);
 
@@ -54,8 +58,9 @@ const CategoriesPanel = ({chooseCategory, chosenCategory}) => {
             .get("https://api.chucknorris.io/jokes/categories")
             .then(resp => {
                 setCategories(resp.data);
-                const [defaultCategory]=resp.data;
+                const [defaultCategory] = resp.data;
                 chooseCategory(defaultCategory);
+                setLoading(false);
             })
             .catch(err => {
                 console.log(err);
@@ -63,32 +68,29 @@ const CategoriesPanel = ({chooseCategory, chosenCategory}) => {
     };
 
     return (
-        <Box>
-            <List className={classes.root}>
-                {categories.map((category, index) => {
+        <>
+            {isDataLoading ? <Box display="flex" justifyContent="center"><CircularProgress/></Box> :
+                <List className={classes.root}>
+                    {categories.map((category, index) => {
                         return (
                             <ListItem
                                 key={index + category}
                                 className={classes.listItem}
                                 button
-                                 // variant="text"
                                 selected={chosenCategory === category}
-                                onClick={()=>{chooseCategory(category)}}
+                                onClick={() => {
+                                    chooseCategory(category)
+                                }}
                             >
-                                {/*<Button*/}
-                                {/*    variant="text"*/}
-                                {/*    // onClick={event => {handleChange(event)}}  */}
-                                {/*    */}
-                                {/*>*/}
-                                    {category}
-                                {/*</Button>*/}
+                                {category}
                             </ListItem>
 
                         )
                     })
-                }
-            </List>
-        </Box>
+                    }
+                </List>
+            }
+        </>
     );
 };
 
@@ -99,4 +101,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect((mapStateToProps), { chooseCategory })(CategoriesPanel);
+export default connect((mapStateToProps), {chooseCategory})(CategoriesPanel);

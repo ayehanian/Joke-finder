@@ -14,7 +14,7 @@ const theme = createMuiTheme({
             xs: 0,
             sm: 600,
             md: 850,
-            lg: 1280,
+            lg: 1200,
             xl: 1920,
         },
     },
@@ -40,8 +40,6 @@ const theme = createMuiTheme({
     // };
 
     typography: {
-        // fontSize: 18,
-        // textAlign: "start",
         lineHeight: 26,
         color: "#333333",
         textAlign: "left",
@@ -63,19 +61,16 @@ const theme = createMuiTheme({
             fontWeight: 500,
             lineHeight: "14px",
             color: "#ABABAB",
-            // textAlign: "start",
         },
         body1: {
             textAlign: "start",
             fontSize: "18px",
-            // padding: "5px 0 28px"
-            // lineHeight: "26px",
         },
         body2: {
             textAlign: "start",
             fontSize: "14px",
             padding: "5px 0 20px"
-            // lineHeight: "20px",
+
         },
 
         overline: {
@@ -95,7 +90,7 @@ const theme = createMuiTheme({
             // color: "#333333",
         }
     },
-    // only relies on 300, 400, 500, and 700 font weights.
+
     overrides: {
         MuiPaper: {
             elevation1: {
@@ -134,7 +129,7 @@ const theme = createMuiTheme({
                             },
                         },*/
             contained: {
-                marginTop:"20px",
+                marginTop: "20px",
                 background: "linear-gradient(92.01deg, #8EA7FF 0%, #7291FF 100%)",
                 borderRadius: "10px",
                 width: "152px",
@@ -161,9 +156,6 @@ const theme = createMuiTheme({
             root: {
                 padding: "10px",
                 backgroundColor: "#FFFFFF",
-                // "&:hover": {
-                //      backgroundColor: lightGreen[100],
-                // },
             },
             sizeSmall: {
                 padding: "4px",
@@ -191,24 +183,20 @@ const theme = createMuiTheme({
                 },
             },
         },
-
-        // MuiFab: {
-        //   secondary: {
-        //     backgroundColor: lightGreen[700],
-        //     "&:hover": {
-        //       backgroundColor: lightGreen[900],
-        //     },
-        //   },
-        // },
-
-
-        // MuiExpansionPanelSummary: {
-        //     content: {
-        //         justifyContent: "space-between",
-        //         alignItems: "center",
-        //         margin: 0,
-        //     },
-        // },
+        MuiInputBase: {
+            root: {
+                padding: "4px 15px 3px",
+                marginTop: "10px",
+                border: "2px solid #333333",
+                borderRadius: "10px",
+                fontSize: "16px",
+            }
+        },
+        MuiCircularProgress: {
+            root: {
+                padding: "20px 0",
+            }
+        }
     }
 });
 
