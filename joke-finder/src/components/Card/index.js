@@ -1,6 +1,8 @@
 import React from "react";
-import {makeStyles} from '@material-ui/core/styles';
+
 import Card from '@material-ui/core/Card';
+import Link from '@material-ui/core/Link';
+import Box from "@material-ui/core/Box";
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -8,29 +10,108 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Launch from '@material-ui/icons/Launch';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
+import {makeStyles} from '@material-ui/core/styles';
+
 import {connect} from "react-redux";
 import {addToFavourites, deleteFromFavourites} from "../../store/actions/Favourites";
 
 
 const useStyles = makeStyles((theme) => ({
-        root: {},
+        root: {
+            padding: theme.spacing(1),
+            marginTop: theme.spacing(2),
+            display: "flex",
+            flexDirection: "column",
+        },
+
+        content: {
+            display: "flex",
+            padding: theme.spacing(0, 1, 1),
+        },
+
+        text: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+        },
+
+        heartBtn: {
+            alignSelf: "flex-end",
+        },
+
         heartIcon: {
             color: theme.palette.primary.favourite
         },
+
+        chatBtn: {
+            color: theme.palette.primary.main,
+            marginRight: theme.spacing(2),
+            '&$disabled': {
+                backgroundColor: theme.palette.primary.light
+            },
+        },
+        chatDarkBtn: {
+            color: theme.palette.primary.main,
+            marginRight: theme.spacing(2),
+            '&$disabled': {
+                backgroundColor: "#FFFFFF"
+            },
+        },
+        disabled: {},
+
+        categoryBox: {
+            display: "inline-block",
+            padding: theme.spacing(0.6, 2),
+            marginTop: theme.spacing(1),
+            borderRadius: "6px",
+            backgroundColor: "#FFFFFF",
+            letterSpacing: "2px",
+            textTransform: "uppercase",
+            [theme.breakpoints.up("sm")]: {
+                marginTop: 0,
+            },
+        },
+
+        greyBackgroundColor: {
+            backgroundColor: theme.palette.primary.light
+        },
+
         fav: {
             backgroundColor: theme.palette.primary.favourite
         },
+
+        jokeValue: {
+            padding: "5px 0 28px"
+        },
+
         idLink: {
-            // "&:after": {
-            //     content: "url('/images/external.png')",
-            //     paddingLeft: "5px"
-            // }
-        }
+            color: "#8EA7FF",
+            textDecoration: "underline",
+            marginLeft: theme.spacing(0.25),
+        },
+
+        idLinkIcon: {
+            fontSize: theme.spacing(1),
+            marginLeft: theme.spacing(0.5),
+        },
+
+        cardFooter: {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "self-start",
+
+            [theme.breakpoints.up("sm")]: {
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+            },
+        },
     }))
 ;
 
-
-const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites}) => {
+const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFavourites}) => {
     const classes = useStyles();
 
     const calcHours = date => {
@@ -42,7 +123,14 @@ const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites})
         if (jokeInfo.categories) {
             return (
                 jokeInfo.categories.map((category, index) => {
-                    return <p key={index + category}>{category}</p>;
+                    return <Typography
+                        key={index + category}
+                        component="span"
+                        variant="subtitle1"
+                        className={`${classes.categoryBox} ${variant === "outlined" ? classes.greyBackgroundColor : null}`}
+                    >
+                        {category}
+                    </Typography>;
                 })
             )
         } else {
@@ -60,31 +148,58 @@ const JokeCard = ({jokeInfo, favourites, addToFavourites, deleteFromFavourites})
 
     const cardContent = () => {
         return (
-            <Card className={classes.root}>
-                <div className={classes.details}>
-                    <CardContent className={classes.content}>
-                        <IconButton aria-label="Favorite Icon" onClick={() => toggleCardToFav(jokeInfo)}>
-                            {isInFav(jokeInfo) === undefined ? <FavoriteBorderIcon className={classes.heartIcon}/> :
-                                <FavoriteIcon className={classes.heartIcon}/>}
-                        </IconButton>
-                        <IconButton aria-label="Message Icon">
-                            <ChatOutlinedIcon/>
-                        </IconButton>
-                        <Typography component="h5" variant="h5" className={classes.idLink}>
-                            ID:{jokeInfo.id}
-                            <Launch/>
+            <Card className={classes.root} variant={variant}>
+                <IconButton className={classes.heartBtn} aria-label="Favorite Icon"
+                            onClick={() => toggleCardToFav(jokeInfo)}>
+                    {isInFav(jokeInfo) === undefined ? <FavoriteBorderIcon className={classes.heartIcon}/> :
+                        <FavoriteIcon className={classes.heartIcon}/>}
+                </IconButton>
+                <CardContent className={classes.content}>
+                    <Box>
+                        {variant === "outlined" ?
+                            <IconButton
+                                aria-label="Message Icon"
+                                disabled
+                                classes={{
+                                    root: classes.chatBtn,
+                                    disabled: classes.disabled,
+                                }}
+                            >
+                                <ChatOutlinedIcon/>
+                            </IconButton>
+                            :
+                            <IconButton
+                                aria-label="Message Icon"
+                                disabled
+                                classes={{
+                                    root: classes.chatDarkBtn,
+                                    disabled: classes.disabled,
+                                }}
+                            >
+                                <ChatOutlinedIcon/>
+                            </IconButton>
+                        }
+                    </Box>
+                    <Box className={classes.text}>
+                        <Typography variant="subtitle1">
+                            ID:
+                            <Link href={jokeInfo.url} target="_blank" rel="noreferrer" className={classes.idLink}>
+                                {jokeInfo.id}
+                                <Launch className={classes.idLinkIcon}/>
+                            </Link>
                         </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
+                        <Typography variant={variant === "outlined" ? "body2" : "body1"}
+                                    className={variant === "outlined" ? null : classes.jokeValue}>
                             {jokeInfo.value}
                         </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
-                            Last update: {calcHours(jokeInfo.updated_at)} hours ago
-                        </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
+                        <Box className={classes.cardFooter}>
+                            <Typography variant="subtitle1">
+                                Last update: {calcHours(jokeInfo.updated_at)} hours ago
+                            </Typography>
                             {cardCategories()}
-                        </Typography>
-                    </CardContent>
-                </div>
+                        </Box>
+                    </Box>
+                </CardContent>
             </Card>
         )
     };

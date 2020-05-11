@@ -1,14 +1,29 @@
 import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
+
 import Typography from "@material-ui/core/Typography";
-import FindPanel from "../FindPanel";
 import Grid from "@material-ui/core/Grid";
-import FavouritesPanel from "../FavouritesPanel";
+import Box from "@material-ui/core/Box";
+import {makeStyles} from "@material-ui/core/styles";
+
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import FavouritesPanel from "../FavouritesPanel";
+import FindPanel from "../FindPanel";
 import FavouritesPanelMobile from "../FavouritesPanel/FavPanelMobile";
 
 const useStyles = makeStyles((theme) => ({
-    text: {
+    pageHeader:{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: theme.spacing(2, 2, 0),
+        [theme.breakpoints.up("sm")]: {
+            padding: theme.spacing(4, 4, 0),
+        },
+        [theme.breakpoints.up("md")]: {
+            padding: theme.spacing(4,14,0),
+        },
+    },
+    pageTitle: {
         fontSize: "20px",
         fontWeight: "bold",
         lineHeight: "28px",
@@ -23,10 +38,12 @@ const MainPage = () => {
 
     return (
         <>
-                <Grid container spacing={3}>
+                <Grid container>
                     <Grid item xs={12} lg={8}>
-                        <Typography component="h3" className={classes.text}>MSI 2020</Typography>
-                        {burgerMenuAdaptive && <FavouritesPanelMobile/>}
+                        <Box className={classes.pageHeader}>
+                            <Typography component="h3" className={classes.pageTitle}>MSI 2020</Typography>
+                            {burgerMenuAdaptive && <FavouritesPanelMobile/>}
+                        </Box>
                         <FindPanel/>
                     </Grid>
                     {burgerMenuAdaptive ? null : (
