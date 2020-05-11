@@ -2,7 +2,7 @@ import React from "react";
 
 import Card from '@material-ui/core/Card';
 import Link from '@material-ui/core/Link';
-import {Box} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -23,21 +23,22 @@ const useStyles = makeStyles((theme) => ({
             display: "flex",
             flexDirection: "column",
         },
+
         content: {
             display: "flex",
             padding: theme.spacing(0, 1, 1),
         },
+
         text: {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
         },
+
         heartBtn: {
             alignSelf: "flex-end",
-
-            // padding: theme.spacing( 2, 2, 1),
-            // textAlign: "right",
         },
+
         heartIcon: {
             color: theme.palette.primary.favourite
         },
@@ -58,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
         },
         disabled: {},
 
-
         categoryBox: {
             display: "inline-block",
             padding: theme.spacing(0.6, 2),
@@ -76,16 +76,14 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: theme.palette.primary.light
         },
 
-        // whiteBackgroundColor: {
-        //     backgroundColor: "teal",
-        //     // backgroundColor: "#FFFFFF",
-        // },
         fav: {
             backgroundColor: theme.palette.primary.favourite
         },
+
         jokeValue: {
             padding: "5px 0 28px"
         },
+
         idLink: {
             color: "#8EA7FF",
             textDecoration: "underline",
@@ -95,11 +93,8 @@ const useStyles = makeStyles((theme) => ({
         idLinkIcon: {
             fontSize: theme.spacing(1),
             marginLeft: theme.spacing(0.5),
-            // "&:after": {
-            //     content: "url('/images/external.png')",
-            //     paddingLeft: "5px"
-            // }
         },
+
         cardFooter: {
             display: "flex",
             flexDirection: "column",
@@ -162,16 +157,13 @@ const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFav
                 <CardContent className={classes.content}>
                     <Box>
                         {variant === "outlined" ?
-
                             <IconButton
                                 aria-label="Message Icon"
-                                // className={`${variant === "outlined" ? classes.greyBackgroundColor : classes.whiteBackgroundColor}`}
                                 disabled
                                 classes={{
                                     root: classes.chatBtn,
                                     disabled: classes.disabled,
                                 }}
-
                             >
                                 <ChatOutlinedIcon/>
                             </IconButton>
@@ -183,19 +175,15 @@ const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFav
                                     root: classes.chatDarkBtn,
                                     disabled: classes.disabled,
                                 }}
-
                             >
                                 <ChatOutlinedIcon/>
                             </IconButton>
                         }
-
-
                     </Box>
                     <Box className={classes.text}>
                         <Typography variant="subtitle1">
-                            {/*className={classes.idLink}*/}
                             ID:
-                            <Link href="#" className={classes.idLink}>
+                            <Link href={jokeInfo.url} target="_blank" rel="noreferrer" className={classes.idLink}>
                                 {jokeInfo.id}
                                 <Launch className={classes.idLinkIcon}/>
                             </Link>

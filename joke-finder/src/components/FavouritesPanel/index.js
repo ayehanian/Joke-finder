@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 
 import JokeCard from "../Card";
 import {makeStyles} from "@material-ui/core/styles";
-import {Box} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({

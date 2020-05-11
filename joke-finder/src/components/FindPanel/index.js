@@ -2,17 +2,15 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {connect} from "react-redux";
 
-import InputBase from "@material-ui/core/InputBase";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import FormControl from '@material-ui/core/FormControl';
+import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
-import {Box} from "@material-ui/core";
-//  import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import {makeStyles} from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 import JokeCard from "../Card";
 import CategoriesPanel from "./CategoriesPanel";
@@ -33,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     form: {
+        textAlign: "start",
         padding: theme.spacing(4.3, 0, 2),
         [theme.breakpoints.up("sm")]: {
             padding: theme.spacing(4.3, 0, 4),
@@ -88,81 +87,68 @@ const FindPanel = ({chosenCategory}) => {
 
     const keyChecking = (event) => {
         if (event.keyCode === 13) {
-        search();
+            search();
         }
     };
-    //     <ValidatorForm
-    //     noValidate={false}
-    //     onSubmit={search}
-    //     onKeyPress={event => onEnter(event)}
-    // >
+
+
     const formContent = () => {
         return (
-            <FormControl component="fieldset" className={classes.form} onKeyDown={(e) => keyChecking(e)}>
+
+            <ValidatorForm
+                noValidate={false}
+                onSubmit={search}
+                component="fieldset"
+                className={classes.form}
+                onKeyDown={(e) => keyChecking(e)}
+            >
                 <RadioGroup aria-label="joke type" name="joke" value={searchJokeParam} onChange={handleChange}>
                     <FormControlLabel value="random" control={<Radio color="default"/>} label="Random"/>
                     <FormControlLabel value="categories" control={<Radio color="default"/>} label="From categories"/>
                     {searchJokeParam === "categories" && <CategoriesPanel/>}
                     <FormControlLabel value="search" control={<Radio color="default"/>} label="Search"/>
                     {searchJokeParam === "search" &&
-
-                    <InputBase
+                    <TextValidator
                         placeholder="Free text search..."
                         onChange={searchChange("query")}
                         inputProps={{'aria-label': 'search'}}
                         autoFocus
-                        error={freeSearchText.query === ""}
-                        // onError={setIsTooltipOpen(true)}
-                        // error={freeSearchText.query===""}
+                        value={freeSearchText.query}
+                        validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
+                        errorMessages={[
+                            "This field is required",
+                            "Please type 3-22 characters, including only latin letters and numbers",
+                        ]}
                     />
-
-                        /* <TextValidator
-                             placeholder="Free text search..."
-                             onChange={searchChange("query")}
-                             // inputProps={{'aria-label': 'search'}}
-                             value={freeSearchText.query}
-
-                             // variant="outlined"
-                             // size="small"
-
-
-                             // validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
-                             // errorMessages={[
-                             //     "This field is required",
-                             //     "Please type 3-22 characters, including only latin letters and numbers",
-                             // ]}
-                             validators={["required", 'minNumber:3', 'maxNumber:20']}
-                             errorMessages={[
-                                 "This field is required", "Minimum 3 characters",  "Max 20 characters",
-                             ]}
-                             />*/
                     }
                 </RadioGroup>
                 <Button
                     type="submit"
                     variant="contained"
                     aria-label="find"
-                    onClick={search}
                 >
                     Get a joke
                 </Button>
-            </FormControl>
+            </ValidatorForm>
 
         )
     };
+
+    let data;
+    if (JokeData.length === 0) {
+        data = <Typography variant="body1">Sorry, no results!</Typography>
+    } else {
+        data = JokeData.map((joke) => {
+            return <JokeCard key={joke.id} jokeInfo={joke} variant="elevation"/>
+        })
+    }
 
     return (
         <Box className={classes.root}>
             <Typography variant="h2">Hey!</Typography>
             <Typography variant="h3">Let’s try to find a joke for you:</Typography>
-
             {formContent()}
-
-            {isDataLoading ? <Box display="flex" justifyContent="center"><CircularProgress/></Box> :
-                JokeData.map((joke) => {
-                    return <JokeCard key={joke.id} jokeInfo={joke} variant="elevation"/>
-                })
-            }
+            {isDataLoading ? <Box display="flex" justifyContent="center"><CircularProgress/></Box> : data}
         </Box>
     );
 };

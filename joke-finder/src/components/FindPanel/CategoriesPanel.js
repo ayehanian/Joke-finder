@@ -8,9 +8,9 @@ import ListItem from '@material-ui/core/ListItem';
 import {makeStyles} from "@material-ui/core/styles";
 
 import {chooseCategory} from "../../store/actions/ChoosenCategory";
-import {Box} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import JokeCard from "../Card";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,20 +24,12 @@ const useStyles = makeStyles((theme) => ({
         margin: "5px",
         border: "2px solid #F8F8F8",
         borderRadius: "6px",
-        // boxSizing: "border-box",
         color: theme.palette.primary.main,
         textTransform: "uppercase",
         fontSize: "12px",
         fontWeight: 500,
         lineHeight: "16px",
         letterSpacing: "2px",
-        // '&$hover': {
-        //     borderColor: theme.palette.primary.dark
-        // },
-        // '&$selected': {
-        //     backgroundColor: theme.palette.primary.light,
-        //     color: theme.palette.primary.dark
-        // },
     },
 }));
 

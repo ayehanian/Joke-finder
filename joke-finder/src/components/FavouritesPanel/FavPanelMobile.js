@@ -1,16 +1,16 @@
 import React from "react";
+
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-
 import DragHandleRoundedIcon from '@material-ui/icons/DragHandleRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import Box from "@material-ui/core/Box";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+
 import FavouritesPanel from "./index";
-// import Box from "@material-ui/core/Box";
-import {Box} from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
     list: {

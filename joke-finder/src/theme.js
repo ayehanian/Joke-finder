@@ -190,6 +190,16 @@ const theme = createMuiTheme({
                 border: "2px solid #333333",
                 borderRadius: "10px",
                 fontSize: "16px",
+            },
+        },
+        MuiInput:{
+            underline: {
+                "&:before": {
+                    borderBottom: "none",
+                },
+                "&:after": {
+                    borderBottom: "none",
+                },
             }
         },
         MuiCircularProgress: {
