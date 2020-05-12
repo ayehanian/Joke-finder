@@ -6,7 +6,6 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -14,34 +13,11 @@ import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 import JokeCard from "../Card";
 import CategoriesPanel from "./CategoriesPanel";
+import Styles from "./styles";
 
-
-const useStyles = makeStyles((theme) => ({
-
-    root: {
-        display: "flex",
-        flexDirection: "column",
-        padding: theme.spacing(7.8, 2, 7.1),
-        [theme.breakpoints.up("sm")]: {
-            padding: theme.spacing(7.8, 4, 7.1),
-        },
-        [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(7.8, 14, 14),
-        },
-    },
-
-    form: {
-        textAlign: "start",
-        padding: theme.spacing(4.3, 0, 2),
-        [theme.breakpoints.up("sm")]: {
-            padding: theme.spacing(4.3, 0, 4),
-        },
-    },
-
-}));
 
 const FindPanel = ({chosenCategory}) => {
-    const classes = useStyles();
+    const classes = Styles();
 
     const [isDataLoading, setLoading] = useState(false);
     const [JokeData, setJokeData] = useState([]);
