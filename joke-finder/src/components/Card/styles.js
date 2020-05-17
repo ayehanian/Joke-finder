@@ -92,6 +92,7 @@ const Styles = makeStyles((theme) => ({
             alignItems: "center",
         },
     },
+
 }));
 
 export default Styles;

@@ -2,6 +2,7 @@ const initialState = {
   chosenCategory: "",
 };
 
+
 function searchReducer(state = initialState, action) {
   switch (action.type) {
     case "CHOSEN_CATEGORY":
