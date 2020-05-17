@@ -53,7 +53,7 @@ const FindPanel = ({chosenCategory}) => {
             setLoading(false);
         })
             .catch(err => {
-                console.log(err);
+                console.error(err);
             });
     };
 
@@ -85,7 +85,7 @@ const FindPanel = ({chosenCategory}) => {
                         inputProps={{'aria-label': 'search'}}
                         autoFocus
                         value={freeSearchText.query}
-                        validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,25}"] }
+                        validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,25}"]}
                         errorMessages={[
                             "This field is required",
                             "Please type 3-25 characters, including only latin letters and numbers",
