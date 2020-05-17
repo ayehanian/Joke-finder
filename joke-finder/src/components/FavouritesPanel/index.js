@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import PropTypes from 'prop-types';
 
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -43,3 +44,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(FavouritesPanel);
+
+FavouritesPanel.propTypes = {
+    favourites: PropTypes.array,
+};
