@@ -1,47 +1,25 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
 import {connect} from "react-redux";
+import PropTypes from 'prop-types';
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {makeStyles} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
+import {getRandomJoke, getRandomCategoryJoke, searchJokes} from "../../apiEndpoints";
+
 import JokeCard from "../Card";
 import CategoriesPanel from "./CategoriesPanel";
+import Styles from "./styles";
 
-
-const useStyles = makeStyles((theme) => ({
-
-    root: {
-        display: "flex",
-        flexDirection: "column",
-        padding: theme.spacing(7.8, 2, 7.1),
-        [theme.breakpoints.up("sm")]: {
-            padding: theme.spacing(7.8, 4, 7.1),
-        },
-        [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(7.8, 14, 14),
-        },
-    },
-
-    form: {
-        textAlign: "start",
-        padding: theme.spacing(4.3, 0, 2),
-        [theme.breakpoints.up("sm")]: {
-            padding: theme.spacing(4.3, 0, 4),
-        },
-    },
-
-}));
 
 const FindPanel = ({chosenCategory}) => {
-    const classes = useStyles();
+    const classes = Styles();
 
     const [isDataLoading, setLoading] = useState(false);
     const [JokeData, setJokeData] = useState([]);
@@ -49,7 +27,7 @@ const FindPanel = ({chosenCategory}) => {
     const [freeSearchText, setFreeSearchText] = useState({query: ""});
 
     useEffect(() => {
-        req("random");
+        search();
     }, []);
 
     const searchChange = prop => event => {
@@ -62,26 +40,20 @@ const FindPanel = ({chosenCategory}) => {
 
     const search = () => {
         setLoading(true);
-        let query = "";
+        let response = "";
         if (searchJokeParam === "random") {
-            query = "random";
+            response = getRandomJoke()
         } else if (searchJokeParam === "categories") {
-            query = `random?category=${chosenCategory}`
+            response = getRandomCategoryJoke(chosenCategory)
         } else {
-            query = `search?query=${freeSearchText.query}`
+            response = searchJokes(freeSearchText.query)
         }
-        req(query);
-    };
-
-    const req = (query) => {
-        axios
-            .get(`https://api.chucknorris.io/jokes/${query}`)
-            .then(resp => {
-                searchJokeParam === "search" ? setJokeData(resp.data.result) : setJokeData([resp.data]);
-                setLoading(false);
-            })
+        response.then(resp => {
+            searchJokeParam === "search" ? setJokeData(resp.data.result) : setJokeData([resp.data]);
+            setLoading(false);
+        })
             .catch(err => {
-                console.log(err);
+                console.error(err);
             });
     };
 
@@ -90,7 +62,6 @@ const FindPanel = ({chosenCategory}) => {
             search();
         }
     };
-
 
     const formContent = () => {
         return (
@@ -114,10 +85,10 @@ const FindPanel = ({chosenCategory}) => {
                         inputProps={{'aria-label': 'search'}}
                         autoFocus
                         value={freeSearchText.query}
-                        validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,22}$"]}
+                        validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,25}"]}
                         errorMessages={[
                             "This field is required",
-                            "Please type 3-22 characters, including only latin letters and numbers",
+                            "Please type 3-25 characters, including only latin letters and numbers",
                         ]}
                     />
                     }
@@ -160,3 +131,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(FindPanel);
+
+JokeCard.propTypes = {
+    chosenCategory: PropTypes.string,
+};

@@ -1,39 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
-import Typography from "@material-ui/core/Typography";
+import PropTypes from 'prop-types';
 
-import JokeCard from "../Card";
-import {makeStyles} from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        backgroundColor: theme.palette.primary.light,
-        height: "100vh",
-        padding: theme.spacing(0, 2, 2),
-        [theme.breakpoints.up("sm")]: {
-            padding: theme.spacing(0, 4, 4),
-        },
-        [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(2, 4, 4),
-        },
-    },
-    sideMenuTitle: {
-        fontSize: theme.spacing(2),
-        marginBottom: theme.spacing(2),
-    },
-    emptyStub: {
-        padding: theme.spacing(2),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-    }
-}));
+import JokeCard from "../Card";
+import Styles from "./styles";
 
 
 const FavouritesPanel = ({favourites}) => {
-    const classes = useStyles();
+    const classes = Styles();
 
     const isDesktop = useMediaQuery(theme => theme.breakpoints.up('lg'));
 
@@ -66,3 +44,7 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(FavouritesPanel);
+
+FavouritesPanel.propTypes = {
+    favourites: PropTypes.array,
+};

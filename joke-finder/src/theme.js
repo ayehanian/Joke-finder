@@ -29,21 +29,10 @@ const theme = createMuiTheme({
     },
     spacing: 10,
 
-    // theme.typography.h3 = {
-    //     fontSize: '1.2rem',
-    //     '@media (min-width:600px)': {
-    //         fontSize: '1.5rem',
-    //     },
-    //     [theme.breakpoints.up('md')]: {
-    //         fontSize: '2.4rem',
-    //     },
-    // };
-
     typography: {
         lineHeight: 26,
         color: "#333333",
         textAlign: "left",
-
         h2: {
             fontSize: "32px",
             fontWeight: "bold",
@@ -70,28 +59,11 @@ const theme = createMuiTheme({
             textAlign: "start",
             fontSize: "14px",
             padding: "5px 0 20px"
-
         },
-
-        overline: {
-            /*            padding: "6px 20px",
-                        marginTop: "10px",
-                        fontSize: "10px",
-                        fontWeight: 500,
-                        letterSpacing: "2px",
-                        textTransform: "uppercase",*/
-            // lineHeight: "14px",
-            /* or 140% */
-            // fontSize: "10px",
-            // fontWeight: 500,
-            // lineHeight: "14px",
-            // /* or 140% */
-            // letterSpacing: "2px",
-            // color: "#333333",
-        }
     },
 
     overrides: {
+
         MuiPaper: {
             elevation1: {
                 backgroundColor: "#F8F8F8",
@@ -104,30 +76,12 @@ const theme = createMuiTheme({
                 borderRadius: "10px",
             },
         },
+
         MuiButton: {
             root: {
                 fontSize: "13px",
                 fontWeight: 700,
             },
-            /*            text: {
-                            // border: "2px solid #F8F8F8",
-                            // // boxSizing: "border-box",
-                            // color: "#ABABAB",
-                            // borderRadius: "6px",
-                            // textTransform: "uppercase",
-                            // fontSize: "12px",
-                            // fontWeight: 500,
-                            // lineHeight: "16px",
-                            // letterSpacing: "2px",
-                            '&$hover': {
-                                borderColor: "#333333"
-                            },
-
-                            "&:hover": {
-                                color: "black",
-                                backgroundColor: "#F8F8F8",
-                            },
-                        },*/
             contained: {
                 marginTop: "20px",
                 background: "linear-gradient(92.01deg, #8EA7FF 0%, #7291FF 100%)",
@@ -137,12 +91,9 @@ const theme = createMuiTheme({
                 fontWeight: "bold",
                 fontSize: "16px",
                 color: "#FFFFFF",
-                "&:hover": {
-                    // border: "1px solid #333333",
-                },
             },
-
         },
+
         MuiListItem: {
             root: {
                 width: "inherit",
@@ -152,6 +103,7 @@ const theme = createMuiTheme({
                 },
             }
         },
+
         MuiIconButton: {
             root: {
                 padding: "10px",
@@ -176,6 +128,7 @@ const theme = createMuiTheme({
                 },
             },
         },
+
         MuiFormControlLabel: {
             root: {
                 "&:checked": {
@@ -183,6 +136,7 @@ const theme = createMuiTheme({
                 },
             },
         },
+
         MuiInputBase: {
             root: {
                 padding: "4px 15px 3px",
@@ -192,6 +146,7 @@ const theme = createMuiTheme({
                 fontSize: "16px",
             },
         },
+
         MuiInput:{
             underline: {
                 "&:before": {
@@ -202,6 +157,7 @@ const theme = createMuiTheme({
                 },
             }
         },
+
         MuiCircularProgress: {
             root: {
                 padding: "20px 0",
@@ -209,6 +165,5 @@ const theme = createMuiTheme({
         }
     }
 });
-
 
 export default theme;

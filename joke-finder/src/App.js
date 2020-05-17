@@ -1,11 +1,14 @@
 import React from 'react';
-import './App.css';
 import MainPage from "./components/MainPage";
+import ErrorBoundary from "./components/ErrorBoundary";
+
 
 function App() {
     return (
-        <div className="App">
-            <MainPage/>
+        <div>
+            <ErrorBoundary>
+                <MainPage/>
+            </ErrorBoundary>
         </div>
     );
 }

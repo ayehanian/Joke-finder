@@ -3,36 +3,16 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import {makeStyles} from "@material-ui/core/styles";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import FavouritesPanel from "../FavouritesPanel";
 import FindPanel from "../FindPanel";
 import FavouritesPanelMobile from "../FavouritesPanel/FavPanelMobile";
+import Styles from "./styles";
 
-const useStyles = makeStyles((theme) => ({
-    pageHeader:{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: theme.spacing(2, 2, 0),
-        [theme.breakpoints.up("sm")]: {
-            padding: theme.spacing(4, 4, 0),
-        },
-        [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(4,14,0),
-        },
-    },
-    pageTitle: {
-        fontSize: "20px",
-        fontWeight: "bold",
-        lineHeight: "28px",
-        textTransform: "uppercase",
-    },
-}));
 
 const MainPage = () => {
-    const classes = useStyles();
+    const classes = Styles();
 
     const burgerMenuAdaptive = useMediaQuery(theme => theme.breakpoints.down('md'));
 
