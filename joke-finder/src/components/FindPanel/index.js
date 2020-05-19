@@ -82,7 +82,7 @@ const FindPanel = ({chosenCategory}) => {
                     <TextValidator
                         placeholder="Free text search..."
                         onChange={searchChange("query")}
-                        inputProps={{'aria-label': 'search'}}
+                        inputProps={{'aria-label': 'Free text search'}}
                         autoFocus
                         value={freeSearchText.query}
                         validators={["required", "matchRegexp:^[a-zA-Z0-9]{3,25}"]}
