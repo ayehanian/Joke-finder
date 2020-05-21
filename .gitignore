@@ -1,3 +1,4 @@
+
 /bower_components/
 /node_modules/
 /node_modules
@@ -14,15 +15,9 @@ _brief/
 .env
 e --abort
 debug.log
-
-# from server .gitignore:
-
-# dependencies
-.vscode
-/node_modules
-node_modules
 /.pnp
 .pnp.js
+
 
 # testing
 /coverage
@@ -31,7 +26,6 @@ node_modules
 # /build
 
 # misc
-.DS_Store
 .env.local
 .env.development.local
 .env.test.local
@@ -43,3 +37,6 @@ yarn-error.log*
 
 # mongoURI
 /config/keys_dev.js
+
+# production
+/build

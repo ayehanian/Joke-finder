@@ -21,6 +21,15 @@ describe('Favourites reducer', () => {
         expect(newState).toEqual({favourites: [],});
     });
 
+    it('should return state when trying to delete smth nonexistent', () => {
+        const state = {favourites: [],};
+        const newState = favouritesReducer(state, {
+            type: 'DELETE_FROM_FAV_SUCCESS',
+            payload: objToAdd,
+        });
+        expect(newState).toEqual({favourites: [],});
+    });
+
     it('should add to favourites', () => {
         const newState = favouritesReducer(initialState, {
             type: 'ADD_TO_FAV_SUCCESS',

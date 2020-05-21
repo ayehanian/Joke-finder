@@ -6,11 +6,13 @@ import {chooseCategory, getCategories} from "./Categories";
 import {addToFavourites, deleteFromFavourites} from "./Favourites";
 
 jest.mock("axios");
-afterAll(() => {
-    jest.restoreAllMocks();
-});
+
 
 describe('Actions', () => {
+
+    afterAll(() => {
+        jest.restoreAllMocks();
+    });
 
     it('Adding to favourites action', () => {
         const expectedAction = {
