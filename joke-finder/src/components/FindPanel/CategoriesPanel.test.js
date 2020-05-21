@@ -40,7 +40,6 @@ beforeEach(() => {
 
 describe('<CategoriesPanel /> connected React-Redux rendering', () => {
 
-
     it('should render a Preloader', () => {
         const loadedState = {
             categoriesReducer: {
