@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from "redux";
+import thunk from "redux-thunk";
 import {Provider} from 'react-redux';
 
 import rootReducer from "./store/reducers/rootReducer";
@@ -16,7 +17,12 @@ import * as serviceWorker from './serviceWorker';
 
 
 const persistedState = loadState();
-const store = createStore(rootReducer, persistedState);
+
+const store = createStore(
+    rootReducer,
+    persistedState,
+    applyMiddleware(thunk),
+);
 
 store.subscribe(() => {
     saveState({favouritesReducer: store.getState().favouritesReducer});
@@ -33,8 +39,3 @@ ReactDOM.render(
 
 
 serviceWorker.unregister();
-
-
-
-
-
