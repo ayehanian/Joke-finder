@@ -24,7 +24,6 @@ const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFav
 
 
     const cardCategories = () => {
-        if (jokeInfo.categories) {
             return (
                 jokeInfo.categories.map((category, index) => {
                     return <Typography
@@ -37,9 +36,6 @@ const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFav
                     </Typography>;
                 })
             )
-        } else {
-            return null
-        }
     };
 
     const isInFav = (card) => {
