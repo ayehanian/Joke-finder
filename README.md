@@ -1,6 +1,7 @@
 # Find jokes about Chuck Norris 
 
-
+It’s a simple react SPA with ability to find a joke (random, by category or by searching) and mark it as favourite.
+The app was deployed at Heroku: [сheck it here](https://chuck-norris-jokes-finder.herokuapp.com/).
 
 ## Available Scripts
 ``` bash
@@ -20,6 +21,9 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+For styling - [Material UI](https://material-ui.com/).
+
+
 ## License
 ```
 WWWWWW||WWWWWW
@@ -33,4 +37,4 @@ WWWWWW||WWWWWW
         _||_|| _||_||
        (__|__|(__|__|
 ```
-The Joke-finder is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Joke-finder is open-sourced and licensed under the [MIT license](https://opensource.org/licenses/MIT).

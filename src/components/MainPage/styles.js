@@ -19,6 +19,10 @@ const Styles = makeStyles((theme) => ({
         lineHeight: "28px",
         textTransform: "uppercase",
     },
+    favPanel: {
+        backgroundColor: theme.palette.primary.light
+    },
+
 }));
 
 export default Styles;

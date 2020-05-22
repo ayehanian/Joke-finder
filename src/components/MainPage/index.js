@@ -27,7 +27,7 @@ const MainPage = () => {
                         <FindPanel/>
                     </Grid>
                     {burgerMenuAdaptive ? null : (
-                        <Grid item lg={4}>
+                        <Grid item lg={4} className={classes.favPanel}>
                             <FavouritesPanel/>
                         </Grid>
                     )}
