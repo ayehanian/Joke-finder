@@ -3,7 +3,10 @@ import React from "react";
 const Timer = ({updated}) => {
 
     const calcHours = () => {
-        let hours = `${Date.now()}`.replace(/-/g, '/')- Date.parse(updated.replace(/-/g, "/"));
+        let hours =  Date.now() - Date.parse(updated);
+        if(isNaN(hours)){
+           hours = `${Date.now()}`.replace(/-/g, '/')- Date.parse(updated);
+        }
         return Math.round(hours / 3600000);
     };
 
