@@ -3,8 +3,6 @@ import {makeStyles} from "@material-ui/core/styles";
 const Styles = makeStyles((theme) => ({
 
     root: {
-        backgroundColor: theme.palette.primary.light,
-        height: "max-content",
         padding: theme.spacing(0, 2, 2),
         [theme.breakpoints.up("sm")]: {
             padding: theme.spacing(0, 4, 4),
@@ -17,6 +15,7 @@ const Styles = makeStyles((theme) => ({
     },
 
     emptyStub: {
+        height: "100wh",
         padding: theme.spacing(2),
         display: "flex",
         flexDirection: "column",
@@ -24,7 +23,6 @@ const Styles = makeStyles((theme) => ({
     },
 
     list: {
-        backgroundColor: theme.palette.primary.light,
         width: "100vw",
         overscrollBehaviorY: "contain",
         [theme.breakpoints.up("sm")]: {

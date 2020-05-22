@@ -137,6 +137,12 @@ const theme = createMuiTheme({
             },
         },
 
+        MuiDrawer: {
+            paperAnchorRight: {
+                backgroundColor: "#F8F8F8",
+            }
+        },
+
         MuiInputBase: {
             root: {
                 padding: "4px 15px 3px",
@@ -147,7 +153,7 @@ const theme = createMuiTheme({
             },
         },
 
-        MuiInput:{
+        MuiInput: {
             underline: {
                 "&:before": {
                     borderBottom: "none",
