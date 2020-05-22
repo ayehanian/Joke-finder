@@ -4,19 +4,16 @@ const Styles = makeStyles((theme) => ({
 
     root: {
         backgroundColor: theme.palette.primary.light,
-        height: "100vh",
+        height: "max-content",
         padding: theme.spacing(0, 2, 2),
         [theme.breakpoints.up("sm")]: {
             padding: theme.spacing(0, 4, 4),
-        },
-        [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(2, 4, 4),
         },
     },
 
     sideMenuTitle: {
         fontSize: theme.spacing(2),
-        marginBottom: theme.spacing(2),
+        paddingTop: theme.spacing(4),
     },
 
     emptyStub: {
@@ -29,13 +26,10 @@ const Styles = makeStyles((theme) => ({
     list: {
         backgroundColor: theme.palette.primary.light,
         width: "100vw",
+        overscrollBehaviorY: "contain",
         [theme.breakpoints.up("sm")]: {
             width: "480px",
         },
-    },
-
-    fullList: {
-        width: 'auto',
     },
 
     sideMenuHeader: {
@@ -44,8 +38,11 @@ const Styles = makeStyles((theme) => ({
         alignItems: "center",
     },
 
-    sideMenuHeaderPadding:{
-        padding: theme.spacing(2),
+    sideMenuHeaderPadding: {
+        padding: theme.spacing(2, 2, 0),
+        [theme.breakpoints.up("sm")]: {
+            padding: theme.spacing(4, 4, 0),
+        },
     },
 
     sideMenuTitleMob: {

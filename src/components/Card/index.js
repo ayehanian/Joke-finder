@@ -98,10 +98,11 @@ const JokeCard = ({jokeInfo, variant, favourites, addToFavourites, deleteFromFav
                         </Typography>
                         <Box className={classes.cardFooter}>
                             <Typography variant="subtitle1">
-                                Last update:&nbsp;
+                                <Box component="span" className={classes.span}>Last update:</Box>
                                 <Timer updated={jokeInfo.updated_at}/>
                                 &nbsp;hours ago
                             </Typography>
+
                             {cardCategories()}
                         </Box>
                     </Box>
