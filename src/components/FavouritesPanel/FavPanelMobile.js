@@ -1,6 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
 
-import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,12 +14,7 @@ import Styles from "./styles";
 const FavouritesPanelMobile = () => {
     const classes = Styles();
 
-    const [state, setState] = React.useState({
-        top: false,
-        left: false,
-        bottom: false,
-        right: false,
-    });
+    const [state, setState] = useState({right: false,});
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -30,11 +24,8 @@ const FavouritesPanelMobile = () => {
     };
 
     const sideList = anchor => (
-
-        <div className={clsx(classes.list, {[classes.fullList]: anchor === 'top' || anchor === 'bottom',})}
-             role="presentation"
-        >
-            <div className={classes.sideMenuHeader}>
+        <div className={classes.list} role="presentation">
+            <div className={`${classes.sideMenuHeader} ${classes.sideMenuHeaderPadding}`}>
                 <IconButton
                     aria-label="close drawer"
                     size="small"
@@ -45,7 +36,7 @@ const FavouritesPanelMobile = () => {
                 </IconButton>
                 <Typography
                     variant="subtitle1"
-                    className={`${classes.sideMenuTitleMob} ${classes.sideMenuHeaderPadding}`}
+                    className={classes.sideMenuTitleMob}
                     onClick={toggleDrawer(anchor, false)}
                 >
                     Favourite

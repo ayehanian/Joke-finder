@@ -49,6 +49,7 @@ const Styles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
         borderRadius: "6px",
         backgroundColor: "#FFFFFF",
+        color: theme.palette.primary.dark,
         letterSpacing: "2px",
         textTransform: "uppercase",
         [theme.breakpoints.up("sm")]: {
@@ -77,6 +78,10 @@ const Styles = makeStyles((theme) => ({
     idLinkIcon: {
         fontSize: theme.spacing(1),
         marginLeft: theme.spacing(0.5),
+    },
+    span:{
+     fontWeight: "normal",
+     paddingRight: theme.spacing(0.25),
     },
 
     cardFooter: {
