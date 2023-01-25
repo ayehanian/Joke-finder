@@ -140,6 +140,7 @@ const MainPage = () => {
                 wrapper.style.display = 'flex'
                 wrapper.style.justifyContent = 'center'
                 wrapper.style.alignItems = 'center'
+                wrapper.style.background = ' #0b0e13'
 
                 const button = document.createElement('button');
                 button.id = 'ph-login';
