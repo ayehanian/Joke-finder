@@ -18,8 +18,8 @@ const MainPage = () => {
 
     useEffect(() => {
        function PlayHera(clientId, container) {
-    const playheraPage = 'https://develop-web.playhera.com'
-    const playheraBaseURL = 'https://develop-westeurope.playhera.com/api/';
+    const playheraPage = 'http://stage-web.playhera.com/'
+    const playheraBaseURL = 'https://stage-mena.playhera.com/api/';
     const defaultAvatar = 'default-user.svg'
 
     const self = this;
@@ -37,6 +37,8 @@ const MainPage = () => {
     (function() {
         createLoginBtn();
         if(refresh && access) startLogin()
+        
+         document.addEventListener('fullscreenchange', fullScreenChanged);
     })();
 
     self.isOpenedFromMobile = function() {
@@ -66,6 +68,17 @@ const MainPage = () => {
         return result;
     };
 
+   function fullScreenChanged (event) {
+                if (document.fullscreenElement) {
+                    // androidInterface.isFullscreenOn()
+                    console.log(event);
+                    console.log(`Element: ${document.fullscreenElement.id} entered fullscreen mode.`);
+                } else {
+                    console.log('Leaving fullscreen mode.');
+                    // androidInterface.isFullscreenOff()
+                }
+    }
+           
     function createLoginBtn() {
         const wrapper =  document.querySelector(container)
         wrapper.style.width = '100%'
@@ -286,15 +299,26 @@ const MainPage = () => {
         );       
    }, [ ]);
     
+ const toggleFullScreen = () => {
+        if (document.fullscreenElement) document.exitFullscreen()
+        else  document.getElementById('main-container').requestFullscreen()
+ };
+    
     return (
         <>
-                <Grid container>
-        
-                 <div id="ph-login-container"></div>
-        
+            <div>
+                <div id="ph-login-container"></div>
+                <Grid container id='main-container' className={classes.container}>
                     <Grid item xs={12} lg={8}>
                         <Box className={classes.pageHeader}>
-                            <Typography component="h3" className={classes.pageTitle}>MSI 2020</Typography>
+                            <button
+                                onClick={toggleFullScreen}
+                                className={"MuiButtonBase-root MuiButton-root"}
+                                style={{border : '1px solid #ff6767'}}
+                            >
+                                Toggle Fullscreen
+                            </button>
+                            {/*<Typography component="h3" className={classes.pageTitle}>MSI 2020</Typography>*/}
                             {burgerMenuAdaptive && <FavouritesPanelMobile/>}
                         </Box>
                         <FindPanel/>
@@ -305,6 +329,7 @@ const MainPage = () => {
                         </Grid>
                     )}
                 </Grid>
+            </div>
         </>
     );
 };
