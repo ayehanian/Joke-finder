@@ -1,6 +1,9 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 const Styles = makeStyles((theme) => ({
+    container: {
+        background: "white",
+    },
     pageHeader: {
         display: "flex",
         justifyContent: "space-between",
