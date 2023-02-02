@@ -71,7 +71,7 @@ const MainPage = () => {
    function fullScreenChanged (event) {
                 if (document.fullscreenElement) {
                   if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.toggleMessageHandler) {
-                      window.webkit.messageHandlers.submit.postMessage(‘toggleFullScreen’);
+                      window.webkit.messageHandlers.submit.postMessage('toggleFullScreen');
                     }
                     if (window.androidInterface ) window.androidInterface.isFullscreenOn()
                    console.log(`Element: ${document.fullscreenElement.id} entered fullscreen mode.`);
