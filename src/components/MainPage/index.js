@@ -70,11 +70,14 @@ const MainPage = () => {
 
    function fullScreenChanged (event) {
                 if (document.fullscreenElement) {
-                   window.androidInterface.isFullscreenOn()
+                  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.toggleMessageHandler) {
+                        window.webkit.messageHandlers.toggleMessageHandler.goFullscreen()
+                    }
+                    if (window.androidInterface ) window.androidInterface.isFullscreenOn()
                    console.log(`Element: ${document.fullscreenElement.id} entered fullscreen mode.`);
                 } else {
                    console.log('Leaving fullscreen mode.');
-                   window.androidInterface.isFullscreenOff()
+                   if (window.androidInterface ) window.androidInterface.isFullscreenOff()
                 }
     }
            
