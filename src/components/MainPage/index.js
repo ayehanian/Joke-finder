@@ -314,6 +314,7 @@ const MainPage = () => {
                     <Grid item xs={12} lg={8}>
                         <Box className={classes.pageHeader}>
                             <button
+                                id="fullscreenButton"
                                 onClick={toggleFullScreen}
                                 className={"MuiButtonBase-root MuiButton-root"}
                                 style={{border : '1px solid #ff6767'}}
