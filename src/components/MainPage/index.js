@@ -37,12 +37,21 @@ const MainPage = () => {
     (function() {
         createLoginBtn();
         if(refresh && access) startLogin()
-        
-      document.addEventListener("DOMContentLoaded",  function() {
-       if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.toggleMessageHandler) {
+     
+        console.log('readyState',document.readyState)
+if(document.readyState == ‘complete’) {
+       if (window.webkit && window.webkit.messageHandlers) {
+          console.log( window.webkit)
          window.webkit.messageHandlers.submit.postMessage("toggleFullScreen");
-           }
+       }
+        } else {
+      document.addEventListener("DOMContentLoaded", function() {
+           console.log( window.webkit)
+       if (window.webkit && window.webkit.messageHandlers) {
+         window.webkit.messageHandlers.submit.postMessage("toggleFullScreen");
+       }
      });
+        }
         
          document.addEventListener('fullscreenchange', fullScreenChanged);
     })();
