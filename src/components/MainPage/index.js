@@ -39,7 +39,7 @@ const MainPage = () => {
         if(refresh && access) startLogin()
      
         console.log('readyState',document.readyState)
-if(document.readyState == 'complete') {
+if(document.readyState !== 'loading') {
        if (window.webkit && window.webkit.messageHandlers) {
           console.log( window.webkit)
          window.webkit.messageHandlers.submit.postMessage("toggleFullScreen");
