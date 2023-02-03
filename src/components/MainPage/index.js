@@ -38,6 +38,12 @@ const MainPage = () => {
         createLoginBtn();
         if(refresh && access) startLogin()
         
+      document.addEventListener("DOMContentLoaded",  function() {
+       if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.toggleMessageHandler) {
+         window.webkit.messageHandlers.submit.postMessage("toggleFullScreen");
+           }
+     });
+        
          document.addEventListener('fullscreenchange', fullScreenChanged);
     })();
 
